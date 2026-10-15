@@ -1,0 +1,282 @@
+{
+  "run_id": "0e05cff71945",
+  "target": "/workspace/crtw/selfcheck/flawed",
+  "started_at": "2026-10-15T08:24:34+00:00",
+  "finished_at": "2026-10-15T08:24:37+00:00",
+  "stages": [
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-09f2e80f",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 79,
+          "title": "Missing return annotation on `try_then_pass`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def try_then_pass(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-bb45d48f",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 92,
+          "title": "Missing return annotation on `produce_one`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def produce_one(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-0ddb1050",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Long function: giant_function (167 AST nodes)",
+          "detail": "Function `giant_function` has 167 AST nodes which is a complexity hotspot. Consider splitting it.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:97:def giant_function",
+          "remediation": "Extract helper functions; lower cyclomatic complexity.",
+          "confidence": 0.8,
+          "tags": [
+            "complexity"
+          ]
+        },
+        {
+          "id": "f-b767af55",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Missing type hints on public function `giant_function`",
+          "detail": "Missing annotations for: a, c, d, e, f, g, h",
+          "evidence": "def giant_function(a, c, d, e, f, g, h)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-a4607c1f",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Missing return annotation on `giant_function`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def giant_function(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-47b5bcb2",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 153,
+          "title": "Missing return annotation on `pickle_load`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def pickle_load(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-4a6910b1",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 48,
+          "title": "Bare `except:` swallows all exceptions",
+          "detail": "A bare `except:` catches BaseException including KeyboardInterrupt and SystemExit.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:48: bare except",
+          "remediation": "Catch a specific exception class (e.g. `except ValueError:`).",
+          "confidence": 0.95,
+          "tags": [
+            "error-handling",
+            "bare-except"
+          ]
+        },
+        {
+          "id": "f-3f1bbd93",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 9,
+          "title": "Unused import: `os`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 9: import os",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-d3e23561",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 12,
+          "title": "Unused import: `urllib`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 12: import urllib",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-520dae00",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 53,
+          "title": "Mutable default argument in `append_item`",
+          "detail": "Mutable defaults are shared between calls and cause subtle state-leak bugs.",
+          "evidence": "def append_item(...)",
+          "remediation": "Use `None` as the default and create the mutable inside the function.",
+          "confidence": 0.99,
+          "tags": [
+            "mutable-default"
+          ]
+        },
+        {
+          "id": "f-7a78322c",
+          "severity": "MAJOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 82,
+          "title": "Swallowed exception (`except: pass`)",
+          "detail": "Exception caught and silently dropped.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:82",
+          "remediation": "Log or re-raise; do not silently ignore exceptions.",
+          "confidence": 0.95,
+          "tags": [
+            "swallowed"
+          ]
+        },
+        {
+          "id": "f-c63d3adf",
+          "severity": "MAJOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 75,
+          "title": "Unguarded risky call: `requests.get()`",
+          "detail": "Network or file operation without a try/except or with-context guard.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:75: requests.get",
+          "remediation": "Wrap in try/except (and handle the specific exception class) or use a `with` context.",
+          "confidence": 0.7,
+          "tags": [
+            "error-handling"
+          ]
+        },
+        {
+          "id": "f-6ad7600b",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 9,
+          "title": "ast-fallback:F401: imported but unused: 'os'",
+          "detail": "imported but unused: 'os'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:9",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-5089289d",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 12,
+          "title": "ast-fallback:F401: imported but unused: 'urllib'",
+          "detail": "imported but unused: 'urllib'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:12",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        }
+      ],
+      "duration_ms": 3314,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:24:34+00:00",
+      "finished_at": "2026-10-15T08:24:37+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 26,
+    "counts": {
+      "INFO": 4,
+      "CRITICAL": 3,
+      "MINOR": 5,
+      "MAJOR": 2
+    },
+    "blocking_findings": [],
+    "summary": "verdict=blocked score=26 counts=BLOCKER=0, CRITICAL=3, MAJOR=2, MINOR=5, INFO=4",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

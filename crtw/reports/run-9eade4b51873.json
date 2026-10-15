@@ -1,0 +1,211 @@
+{
+  "run_id": "9eade4b51873",
+  "target": "/workspace/crtw/selfcheck/clean",
+  "started_at": "2026-10-15T08:17:31+00:00",
+  "finished_at": "2026-10-15T08:17:33+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 12,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:31+00:00",
+      "finished_at": "2026-10-15T08:17:31+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "test",
+      "agent_id": "S3-AGI3-009-TESTER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-c46cc10c",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `fetch`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `fetch` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-8f60df07",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `hash_password`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `hash_password` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-d3806445",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `query_user`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `query_user` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-9b195ec6",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `safe_list_dir`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `safe_list_dir` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        }
+      ],
+      "duration_ms": 79,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:31+00:00",
+      "finished_at": "2026-10-15T08:17:31+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    },
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-fc759d4e",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 6: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-da0f55d1",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:6",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        }
+      ],
+      "duration_ms": 2270,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:31+00:00",
+      "finished_at": "2026-10-15T08:17:33+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "debug",
+      "agent_id": "S6-AGI3-014-DEBUGGER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 0,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:33+00:00",
+      "finished_at": "2026-10-15T08:17:33+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 14,
+    "counts": {
+      "MAJOR": 4,
+      "MINOR": 2
+    },
+    "blocking_findings": [],
+    "summary": "verdict=blocked score=14 counts=BLOCKER=0, CRITICAL=0, MAJOR=4, MINOR=2, INFO=0",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

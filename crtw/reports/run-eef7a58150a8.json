@@ -1,0 +1,1151 @@
+{
+  "run_id": "eef7a58150a8",
+  "target": "/workspace/crtw/selfcheck/flawed",
+  "started_at": "2026-10-15T08:15:41+00:00",
+  "finished_at": "2026-10-15T08:15:45+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-76f91c83",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 18,
+          "title": "Hardcoded secret (aws_access_key_id)",
+          "detail": "AWS access key id",
+          "evidence": "AKIA...MPLE",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "aws_access_key_id"
+          ]
+        },
+        {
+          "id": "f-73d4adfb",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 19,
+          "title": "Hardcoded secret (aws_secret_access_key)",
+          "detail": "AWS secret access key",
+          "evidence": "AWS_...KEY\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "aws_secret_access_key"
+          ]
+        },
+        {
+          "id": "f-e6cec36f",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 20,
+          "title": "Hardcoded secret (generic_api_token)",
+          "detail": "Generic API/auth token",
+          "evidence": "API_..._xx\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "generic_api_token"
+          ]
+        },
+        {
+          "id": "f-06e78033",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 24,
+          "title": "Hardcoded secret (hardcoded_password)",
+          "detail": "Hardcoded password",
+          "evidence": "PASS...123\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "hardcoded_password"
+          ]
+        },
+        {
+          "id": "f-9483c445",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 40,
+          "title": "Dangerous use of `eval()`",
+          "detail": "`eval()` executes arbitrary code; common RCE vector if input is untrusted.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:40: eval",
+          "remediation": "Avoid `eval`/`exec`. Use `ast.literal_eval` for data, or restructure to avoid dynamic execution.",
+          "confidence": 0.95,
+          "tags": [
+            "rce",
+            "eval"
+          ]
+        },
+        {
+          "id": "f-766db80d",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 150,
+          "title": "SQL injection risk: f-string SQL query",
+          "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:150",
+          "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+          "confidence": 0.85,
+          "tags": [
+            "sql-injection"
+          ]
+        },
+        {
+          "id": "f-18f92965",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 155,
+          "title": "`pickle.loads` on untrusted input",
+          "detail": "`pickle.loads` allows arbitrary code execution.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:155: pickle.loads",
+          "remediation": "Use JSON or msgpack for untrusted input; never unpickle attacker-controlled bytes.",
+          "confidence": 0.9,
+          "tags": [
+            "rce",
+            "pickle"
+          ]
+        },
+        {
+          "id": "f-89866eeb",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 69,
+          "title": "Command injection: `shell=True` + format string",
+          "detail": "`shell=True` with an f-string/.format() first arg enables command injection.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:69: subprocess.run",
+          "remediation": "Use list-form subprocess (no shell) and pass arguments separately; never interpolate user input.",
+          "confidence": 0.95,
+          "tags": [
+            "command-injection",
+            "shell"
+          ]
+        },
+        {
+          "id": "f-837b9217",
+          "severity": "CRITICAL",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 75,
+          "title": "TLS verification disabled (`verify=False`)",
+          "detail": "`verify=False` disables certificate validation. Vulnerable to MITM.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:75: requests.get(verify=False)",
+          "remediation": "Remove `verify=False`; if you must use a self-signed cert pass `verify='/path/to/cert'`.",
+          "confidence": 0.95,
+          "tags": [
+            "tls",
+            "mitm"
+          ]
+        },
+        {
+          "id": "f-8e1f048b",
+          "severity": "CRITICAL",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 62,
+          "title": "Weak hashing for password: `hashlib.md5`",
+          "detail": "MD5/SHA1 are not suitable for password hashing.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:62: hashlib.md5(...)",
+          "remediation": "Use `hashlib.bcrypt`, `argon2`, or `hashlib.scrypt`.",
+          "confidence": 0.9,
+          "tags": [
+            "crypto",
+            "weak-hash-password"
+          ]
+        }
+      ],
+      "duration_ms": 15,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:41+00:00",
+      "finished_at": "2026-10-15T08:15:41+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "test",
+      "agent_id": "S3-AGI3-009-TESTER",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-2dc9c288",
+          "severity": "CRITICAL",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 16,
+          "title": "Test failure: test_intentional_failure",
+          "detail": "assert produce_one() == 2",
+          "evidence": "This test always fails — verifies the tester/debugger agents can pick it up.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/crtw/selfcheck/flawed/test_flawed.py\", line 16, in test_intentional_failure\n    assert produce_one() == 2\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (failures=1)",
+          "remediation": "Read the traceback, fix the production code or the test expectation.",
+          "confidence": 0.95,
+          "tags": [
+            "tests",
+            "failure"
+          ]
+        },
+        {
+          "id": "f-e5157f03",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 19,
+          "title": "Test `test_no_assertions` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_no_assertions(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-0c90bcfc",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 24,
+          "title": "Test `test_swallowed` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_swallowed(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-e54e5dd8",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `API_TOKEN`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `API_TOKEN` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-39270681",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `AWS_ACCESS_KEY_ID`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `AWS_ACCESS_KEY_ID` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-ff2352d9",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `AWS_SECRET_ACCESS_KEY`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `AWS_SECRET_ACCESS_KEY` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-eea0d244",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `DB_PASSWORD`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `DB_PASSWORD` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-56631be4",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `append_item`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `append_item` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-d590db94",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `cmd`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `cmd` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-5370e7b5",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `fetch_untrusted`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `fetch_untrusted` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-16e9b3d0",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `fragile_div`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `fragile_div` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-19da9795",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `giant_function`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `giant_function` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-6542cc4b",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `hash_password`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `hash_password` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-722b9e28",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `list_user_files`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `list_user_files` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-27d04da7",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `pickle_load`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `pickle_load` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-0d2cbba9",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `public_function_no_one_tests`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `public_function_no_one_tests` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-78646f1a",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `run_dynamic_formula`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `run_dynamic_formula` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-213e35b9",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `safe_div`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `safe_div` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-7ed9a403",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `string_concat_query`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `string_concat_query` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-840c331c",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `use_aws`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `use_aws` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-11bd0718",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/flawed",
+          "line": null,
+          "title": "Untested public symbol: `use_token`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `use_token` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        }
+      ],
+      "duration_ms": 568,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:41+00:00",
+      "finished_at": "2026-10-15T08:15:42+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    },
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-97c2689d",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 79,
+          "title": "Missing return annotation on `try_then_pass`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def try_then_pass(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-1f4fe70a",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 92,
+          "title": "Missing return annotation on `produce_one`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def produce_one(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-0dfe00bc",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Long function: giant_function (167 AST nodes)",
+          "detail": "Function `giant_function` has 167 AST nodes which is a complexity hotspot. Consider splitting it.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:97:def giant_function",
+          "remediation": "Extract helper functions; lower cyclomatic complexity.",
+          "confidence": 0.8,
+          "tags": [
+            "complexity"
+          ]
+        },
+        {
+          "id": "f-c1232a7f",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Missing type hints on public function `giant_function`",
+          "detail": "Missing annotations for: a, c, d, e, f, g, h",
+          "evidence": "def giant_function(a, c, d, e, f, g, h)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-d78319ef",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 97,
+          "title": "Missing return annotation on `giant_function`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def giant_function(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-84fd1533",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 153,
+          "title": "Missing return annotation on `pickle_load`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def pickle_load(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-cf4f870a",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 48,
+          "title": "Bare `except:` swallows all exceptions",
+          "detail": "A bare `except:` catches BaseException including KeyboardInterrupt and SystemExit.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:48: bare except",
+          "remediation": "Catch a specific exception class (e.g. `except ValueError:`).",
+          "confidence": 0.95,
+          "tags": [
+            "error-handling",
+            "bare-except"
+          ]
+        },
+        {
+          "id": "f-2af963c7",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 6,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 6: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-19edda1c",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 9,
+          "title": "Unused import: `os`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 9: import os",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-f8d0f24a",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 12,
+          "title": "Unused import: `urllib`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 12: import urllib",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-6e3d5fa1",
+          "severity": "CRITICAL",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 53,
+          "title": "Mutable default argument in `append_item`",
+          "detail": "Mutable defaults are shared between calls and cause subtle state-leak bugs.",
+          "evidence": "def append_item(...)",
+          "remediation": "Use `None` as the default and create the mutable inside the function.",
+          "confidence": 0.99,
+          "tags": [
+            "mutable-default"
+          ]
+        },
+        {
+          "id": "f-a0805759",
+          "severity": "MAJOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 82,
+          "title": "Swallowed exception (`except: pass`)",
+          "detail": "Exception caught and silently dropped.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:82",
+          "remediation": "Log or re-raise; do not silently ignore exceptions.",
+          "confidence": 0.95,
+          "tags": [
+            "swallowed"
+          ]
+        },
+        {
+          "id": "f-2a1607c3",
+          "severity": "MAJOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 75,
+          "title": "Unguarded risky call: `requests.get()`",
+          "detail": "Network or file operation without a try/except guard.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:75: requests.get",
+          "remediation": "Wrap in try/except and handle the specific exception class.",
+          "confidence": 0.7,
+          "tags": [
+            "error-handling"
+          ]
+        },
+        {
+          "id": "f-1428c4d2",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 10,
+          "title": "Missing return annotation on `test_produce_one`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_produce_one(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-e784039d",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 14,
+          "title": "Missing return annotation on `test_intentional_failure`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_intentional_failure(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-39288e45",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 19,
+          "title": "Missing return annotation on `test_no_assertions`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_no_assertions(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-537364c8",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 24,
+          "title": "Missing return annotation on `test_swallowed`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_swallowed(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-3ffcaeda",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 5,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 5: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-f80b36b3",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 6,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:6",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-6389dbeb",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 9,
+          "title": "ast-fallback:F401: imported but unused: 'os'",
+          "detail": "imported but unused: 'os'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:9",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-f9bea500",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 12,
+          "title": "ast-fallback:F401: imported but unused: 'urllib'",
+          "detail": "imported but unused: 'urllib'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:12",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-001b8486",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 5,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/flawed/test_flawed.py:5",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        }
+      ],
+      "duration_ms": 3261,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:41+00:00",
+      "finished_at": "2026-10-15T08:15:45+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "debug",
+      "agent_id": "S6-AGI3-014-DEBUGGER",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-ea11ff9c",
+          "severity": "CRITICAL",
+          "stage": "debug",
+          "agent_id": "S6-AGI3-014-DEBUGGER",
+          "file": "/workspace/crtw/selfcheck/flawed/test_flawed.py",
+          "line": 16,
+          "title": "Root cause (product bug): Test failure: test_intentional_failure",
+          "detail": "Test: Test failure: test_intentional_failure\nAssertion/Message: assert produce_one() == 2\nSuspected production frame: (unknown)\nClassification: product bug.",
+          "evidence": "This test always fails — verifies the tester/debugger agents can pick it up.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/crtw/selfcheck/flawed/test_flawed.py\", line 16, in test_intentional_failure\n    assert produce_one() == 2\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (failures=1)",
+          "remediation": "Inspect the failing frame in production code. If it's a test bug, fix the assertion or test fixture.",
+          "confidence": 0.85,
+          "tags": [
+            "debug",
+            "product"
+          ]
+        }
+      ],
+      "duration_ms": 0,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:45+00:00",
+      "finished_at": "2026-10-15T08:15:45+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 190,
+    "counts": {
+      "BLOCKER": 8,
+      "CRITICAL": 7,
+      "MAJOR": 22,
+      "INFO": 8,
+      "MINOR": 9
+    },
+    "blocking_findings": [
+      {
+        "id": "f-76f91c83",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 18,
+        "title": "Hardcoded secret (aws_access_key_id)",
+        "detail": "AWS access key id",
+        "evidence": "AKIA...MPLE",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "aws_access_key_id"
+        ]
+      },
+      {
+        "id": "f-73d4adfb",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 19,
+        "title": "Hardcoded secret (aws_secret_access_key)",
+        "detail": "AWS secret access key",
+        "evidence": "AWS_...KEY\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "aws_secret_access_key"
+        ]
+      },
+      {
+        "id": "f-e6cec36f",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 20,
+        "title": "Hardcoded secret (generic_api_token)",
+        "detail": "Generic API/auth token",
+        "evidence": "API_..._xx\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "generic_api_token"
+        ]
+      },
+      {
+        "id": "f-06e78033",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 24,
+        "title": "Hardcoded secret (hardcoded_password)",
+        "detail": "Hardcoded password",
+        "evidence": "PASS...123\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "hardcoded_password"
+        ]
+      },
+      {
+        "id": "f-9483c445",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 40,
+        "title": "Dangerous use of `eval()`",
+        "detail": "`eval()` executes arbitrary code; common RCE vector if input is untrusted.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:40: eval",
+        "remediation": "Avoid `eval`/`exec`. Use `ast.literal_eval` for data, or restructure to avoid dynamic execution.",
+        "confidence": 0.95,
+        "tags": [
+          "rce",
+          "eval"
+        ]
+      },
+      {
+        "id": "f-766db80d",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 150,
+        "title": "SQL injection risk: f-string SQL query",
+        "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:150",
+        "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+        "confidence": 0.85,
+        "tags": [
+          "sql-injection"
+        ]
+      },
+      {
+        "id": "f-18f92965",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 155,
+        "title": "`pickle.loads` on untrusted input",
+        "detail": "`pickle.loads` allows arbitrary code execution.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:155: pickle.loads",
+        "remediation": "Use JSON or msgpack for untrusted input; never unpickle attacker-controlled bytes.",
+        "confidence": 0.9,
+        "tags": [
+          "rce",
+          "pickle"
+        ]
+      },
+      {
+        "id": "f-89866eeb",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 69,
+        "title": "Command injection: `shell=True` + format string",
+        "detail": "`shell=True` with an f-string/.format() first arg enables command injection.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:69: subprocess.run",
+        "remediation": "Use list-form subprocess (no shell) and pass arguments separately; never interpolate user input.",
+        "confidence": 0.95,
+        "tags": [
+          "command-injection",
+          "shell"
+        ]
+      }
+    ],
+    "summary": "verdict=blocked score=190 counts=BLOCKER=8, CRITICAL=7, MAJOR=22, MINOR=9, INFO=8",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

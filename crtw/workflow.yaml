@@ -1,0 +1,78 @@
+# CRTW Workflow Specification
+# Declarative multi-agent code review + testing workflow.
+# Loadable + overrideable by CLI flags.
+
+workflow:
+  name: crtw
+  version: "1.0.0"
+  description: >
+    Automated code review + testing pipeline. Researches the target via tooling
+    adapters, reasons about findings across four specialist agents, then
+    reviews/dedupes them before emitting a gate verdict.
+
+# Stages are topologically executed; ``depends_on`` is a list of stage names that
+# must complete before this stage can run. Stages with the same depth run in
+# parallel via a thread pool.
+stages:
+  - name: security
+    agent: crtw.agents.security:SecurityAuditAgent
+    depends_on: []
+    timeout_s: 30
+    retries: 1
+    adapters: [secret_scan]
+
+  - name: review
+    agent: crtw.agents.reviewer:CodeReviewAgent
+    depends_on: []
+    timeout_s: 30
+    retries: 1
+    adapters: [static_analysis]
+
+  - name: test
+    agent: crtw.agents.tester:TestEngineeringAgent
+    depends_on: []
+    timeout_s: 120
+    retries: 0
+    adapters: [test_runner, coverage]
+
+  - name: debug
+    agent: crtw.agents.debugger:DebuggingAgent
+    depends_on: [test]
+    timeout_s: 30
+    retries: 0
+    adapters: []
+
+# Adapter enable flags. When an adapter is disabled it returns available=False
+# with reason="disabled-by-config". Real tools being missing is also non-fatal.
+adapters:
+  test_runner:
+    enabled: true
+    prefer: pytest      # or unittest
+    pytest_args: []
+  static_analysis:
+    enabled: true
+    tools: [mypy, pyflakes, ruff, flake8]
+  coverage:
+    enabled: true
+  secret_scan:
+    enabled: true
+    redact: true         # never echo full secrets
+
+# Severity weights drive the gate verdict. BLOCKER=10, CRITICAL=5, MAJOR=3,
+# MINOR=1, INFO=0. Score = sum(weight * count) across all findings.
+gate:
+  severity_weights:
+    BLOCKER: 10
+    CRITICAL: 5
+    MAJOR: 3
+    MINOR: 1
+    INFO: 0
+  block_threshold: 10      # weighted_score >= this  -> blocked
+  review_threshold: 5      # weighted_score >= this  -> needs_review
+  block_on_any_blocker: true
+  review_on_any_critical_or_major: true
+
+# Orchestration settings.
+orchestration:
+  max_workers: 4           # parallel stage fan-out cap
+  retry_backoff_base_s: 0.5

@@ -1,0 +1,228 @@
+{
+  "run_id": "136c8e2fb103",
+  "target": "/workspace/crtw/selfcheck/clean",
+  "started_at": "2026-10-15T08:17:07+00:00",
+  "finished_at": "2026-10-15T08:17:10+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 12,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:07+00:00",
+      "finished_at": "2026-10-15T08:17:07+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "test",
+      "agent_id": "S3-AGI3-009-TESTER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-b5f24358",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `fetch`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `fetch` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-dbc12675",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `hash_password`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `hash_password` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-d3115537",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `query_user`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `query_user` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-cd4ac881",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `safe_list_dir`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `safe_list_dir` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        }
+      ],
+      "duration_ms": 86,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:07+00:00",
+      "finished_at": "2026-10-15T08:17:07+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    },
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-e10e788a",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 6: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-c9601c8e",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:6",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-530d2216",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 2,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/clean/test_clean.py:2",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        }
+      ],
+      "duration_ms": 2453,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:07+00:00",
+      "finished_at": "2026-10-15T08:17:10+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "debug",
+      "agent_id": "S6-AGI3-014-DEBUGGER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 0,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:17:10+00:00",
+      "finished_at": "2026-10-15T08:17:10+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 15,
+    "counts": {
+      "MAJOR": 4,
+      "MINOR": 3
+    },
+    "blocking_findings": [],
+    "summary": "verdict=blocked score=15 counts=BLOCKER=0, CRITICAL=0, MAJOR=4, MINOR=3, INFO=0",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

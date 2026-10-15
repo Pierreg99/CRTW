@@ -1,0 +1,105 @@
+{
+  "run_id": "10e8c677f183",
+  "target": "/workspace/crtw/selfcheck/clean",
+  "started_at": "2026-10-15T08:22:22+00:00",
+  "finished_at": "2026-10-15T08:22:24+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 11,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:22:22+00:00",
+      "finished_at": "2026-10-15T08:22:22+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "test",
+      "agent_id": "S3-AGI3-009-TESTER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 155,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:22:22+00:00",
+      "finished_at": "2026-10-15T08:22:22+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    },
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 2241,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:22:22+00:00",
+      "finished_at": "2026-10-15T08:22:24+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "debug",
+      "agent_id": "S6-AGI3-014-DEBUGGER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 0,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:22:24+00:00",
+      "finished_at": "2026-10-15T08:22:24+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "passed",
+    "weighted_score": 0,
+    "counts": {},
+    "blocking_findings": [],
+    "summary": "verdict=passed score=0 counts=BLOCKER=0, CRITICAL=0, MAJOR=0, MINOR=0, INFO=0",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

@@ -1,0 +1,358 @@
+{
+  "run_id": "2d2d7d6bf58c",
+  "target": "/workspace/crtw/selfcheck/flawed",
+  "started_at": "2026-10-15T08:25:42+00:00",
+  "finished_at": "2026-10-15T08:25:42+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-5d6cf21a",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 18,
+          "title": "Hardcoded secret (aws_access_key_id)",
+          "detail": "AWS access key id",
+          "evidence": "AKIA...MPLE",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "aws_access_key_id"
+          ]
+        },
+        {
+          "id": "f-57c665c1",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 19,
+          "title": "Hardcoded secret (aws_secret_access_key)",
+          "detail": "AWS secret access key",
+          "evidence": "AWS_...KEY\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "aws_secret_access_key"
+          ]
+        },
+        {
+          "id": "f-a7f65597",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 20,
+          "title": "Hardcoded secret (generic_api_token)",
+          "detail": "Generic API/auth token",
+          "evidence": "API_..._xx\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "generic_api_token"
+          ]
+        },
+        {
+          "id": "f-89f82fd1",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 24,
+          "title": "Hardcoded secret (hardcoded_password)",
+          "detail": "Hardcoded password",
+          "evidence": "PASS...123\"",
+          "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+          "confidence": 0.99,
+          "tags": [
+            "secret",
+            "hardcoded_password"
+          ]
+        },
+        {
+          "id": "f-06ba3ed6",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 40,
+          "title": "Dangerous use of `eval()`",
+          "detail": "`eval()` executes arbitrary code; common RCE vector if input is untrusted.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:40: eval",
+          "remediation": "Avoid `eval`/`exec`. Use `ast.literal_eval` for data, or restructure to avoid dynamic execution.",
+          "confidence": 0.95,
+          "tags": [
+            "rce",
+            "eval"
+          ]
+        },
+        {
+          "id": "f-efa947a7",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 150,
+          "title": "SQL injection risk: f-string SQL query",
+          "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:150",
+          "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+          "confidence": 0.85,
+          "tags": [
+            "sql-injection"
+          ]
+        },
+        {
+          "id": "f-e6ea1d75",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 155,
+          "title": "`pickle.loads` on untrusted input",
+          "detail": "`pickle.loads` allows arbitrary code execution.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:155: pickle.loads",
+          "remediation": "Use JSON or msgpack for untrusted input; never unpickle attacker-controlled bytes.",
+          "confidence": 0.9,
+          "tags": [
+            "rce",
+            "pickle"
+          ]
+        },
+        {
+          "id": "f-25d6f3fd",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 69,
+          "title": "Command injection: `shell=True` + format string",
+          "detail": "`shell=True` with an f-string/.format() first arg enables command injection.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:69: subprocess.run",
+          "remediation": "Use list-form subprocess (no shell) and pass arguments separately; never interpolate user input.",
+          "confidence": 0.95,
+          "tags": [
+            "command-injection",
+            "shell"
+          ]
+        },
+        {
+          "id": "f-941d4dd3",
+          "severity": "CRITICAL",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 75,
+          "title": "TLS verification disabled (`verify=False`)",
+          "detail": "`verify=False` disables certificate validation. Vulnerable to MITM.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:75: requests.get(verify=False)",
+          "remediation": "Remove `verify=False`; if you must use a self-signed cert pass `verify='/path/to/cert'`.",
+          "confidence": 0.95,
+          "tags": [
+            "tls",
+            "mitm"
+          ]
+        },
+        {
+          "id": "f-a50bcf35",
+          "severity": "CRITICAL",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+          "line": 62,
+          "title": "Weak hashing for password: `hashlib.md5`",
+          "detail": "MD5/SHA1 are not suitable for password hashing.",
+          "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:62: hashlib.md5(...)",
+          "remediation": "Use `hashlib.bcrypt`, `argon2`, or `hashlib.scrypt`.",
+          "confidence": 0.9,
+          "tags": [
+            "crypto",
+            "weak-hash-password"
+          ]
+        }
+      ],
+      "duration_ms": 12,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:25:42+00:00",
+      "finished_at": "2026-10-15T08:25:42+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 90,
+    "counts": {
+      "BLOCKER": 8,
+      "CRITICAL": 2
+    },
+    "blocking_findings": [
+      {
+        "id": "f-5d6cf21a",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 18,
+        "title": "Hardcoded secret (aws_access_key_id)",
+        "detail": "AWS access key id",
+        "evidence": "AKIA...MPLE",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "aws_access_key_id"
+        ]
+      },
+      {
+        "id": "f-57c665c1",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 19,
+        "title": "Hardcoded secret (aws_secret_access_key)",
+        "detail": "AWS secret access key",
+        "evidence": "AWS_...KEY\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "aws_secret_access_key"
+        ]
+      },
+      {
+        "id": "f-a7f65597",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 20,
+        "title": "Hardcoded secret (generic_api_token)",
+        "detail": "Generic API/auth token",
+        "evidence": "API_..._xx\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "generic_api_token"
+        ]
+      },
+      {
+        "id": "f-89f82fd1",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 24,
+        "title": "Hardcoded secret (hardcoded_password)",
+        "detail": "Hardcoded password",
+        "evidence": "PASS...123\"",
+        "remediation": "Move the secret to an environment variable, vault, or secrets manager. Rotate the leaked credential.",
+        "confidence": 0.99,
+        "tags": [
+          "secret",
+          "hardcoded_password"
+        ]
+      },
+      {
+        "id": "f-06ba3ed6",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 40,
+        "title": "Dangerous use of `eval()`",
+        "detail": "`eval()` executes arbitrary code; common RCE vector if input is untrusted.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:40: eval",
+        "remediation": "Avoid `eval`/`exec`. Use `ast.literal_eval` for data, or restructure to avoid dynamic execution.",
+        "confidence": 0.95,
+        "tags": [
+          "rce",
+          "eval"
+        ]
+      },
+      {
+        "id": "f-efa947a7",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 150,
+        "title": "SQL injection risk: f-string SQL query",
+        "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:150",
+        "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+        "confidence": 0.85,
+        "tags": [
+          "sql-injection"
+        ]
+      },
+      {
+        "id": "f-e6ea1d75",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 155,
+        "title": "`pickle.loads` on untrusted input",
+        "detail": "`pickle.loads` allows arbitrary code execution.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:155: pickle.loads",
+        "remediation": "Use JSON or msgpack for untrusted input; never unpickle attacker-controlled bytes.",
+        "confidence": 0.9,
+        "tags": [
+          "rce",
+          "pickle"
+        ]
+      },
+      {
+        "id": "f-25d6f3fd",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/flawed/__init__.py",
+        "line": 69,
+        "title": "Command injection: `shell=True` + format string",
+        "detail": "`shell=True` with an f-string/.format() first arg enables command injection.",
+        "evidence": "/workspace/crtw/selfcheck/flawed/__init__.py:69: subprocess.run",
+        "remediation": "Use list-form subprocess (no shell) and pass arguments separately; never interpolate user input.",
+        "confidence": 0.95,
+        "tags": [
+          "command-injection",
+          "shell"
+        ]
+      }
+    ],
+    "summary": "verdict=blocked score=90 counts=BLOCKER=8, CRITICAL=2, MAJOR=0, MINOR=0, INFO=0",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}

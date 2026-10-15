@@ -1,0 +1,626 @@
+{
+  "run_id": "303e5024387e",
+  "target": "/workspace/crtw/selfcheck/clean",
+  "started_at": "2026-10-15T08:15:49+00:00",
+  "finished_at": "2026-10-15T08:15:53+00:00",
+  "stages": [
+    {
+      "stage": "security",
+      "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+      "status": "failed",
+      "findings": [
+        {
+          "id": "f-33fc0476",
+          "severity": "BLOCKER",
+          "stage": "security",
+          "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 55,
+          "title": "SQL injection risk: f-string SQL query",
+          "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+          "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:55",
+          "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+          "confidence": 0.85,
+          "tags": [
+            "sql-injection"
+          ]
+        }
+      ],
+      "duration_ms": 13,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:49+00:00",
+      "finished_at": "2026-10-15T08:15:49+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "test",
+      "agent_id": "S3-AGI3-009-TESTER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-31d969b1",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 10,
+          "title": "Test `test_safe_div_normal` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_safe_div_normal(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-1bac71c9",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 13,
+          "title": "Test `test_safe_div_zero_raises` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_safe_div_zero_raises(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-2ec25520",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 17,
+          "title": "Test `test_add` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_add(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-bf105e25",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 22,
+          "title": "Test `test_parse_csv` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_parse_csv(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-31ec9284",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 25,
+          "title": "Test `test_token_hex_length` has no assertions",
+          "detail": "Tests with no `assert` always pass — flaky / no-op test.",
+          "evidence": "def test_token_hex_length(...)",
+          "remediation": "Add at least one `assert ...` to validate behaviour.",
+          "confidence": 0.85,
+          "tags": [
+            "tests",
+            "no-assertion"
+          ]
+        },
+        {
+          "id": "f-f1f85cd3",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `cmd`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `cmd` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-0fe915c9",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `digest`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `digest` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-8d96bc2f",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `fetch`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `fetch` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-7c9c9cbe",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `hash_password`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `hash_password` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-7e50dcf3",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `out`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `out` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-946d27c3",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `query_user`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `query_user` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-b40bf65c",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `req`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `req` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-38307e23",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `safe_list_dir`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `safe_list_dir` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        },
+        {
+          "id": "f-f290716c",
+          "severity": "MAJOR",
+          "stage": "test",
+          "agent_id": "S3-AGI3-009-TESTER",
+          "file": "/workspace/crtw/selfcheck/clean",
+          "line": null,
+          "title": "Untested public symbol: `salt`",
+          "detail": "No test references this public symbol.",
+          "evidence": "public symbol `salt` not referenced in any test_*.py",
+          "remediation": "Add a unit test that exercises this function.",
+          "confidence": 0.6,
+          "tags": [
+            "tests",
+            "coverage-gap"
+          ]
+        }
+      ],
+      "duration_ms": 113,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:49+00:00",
+      "finished_at": "2026-10-15T08:15:49+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    },
+    {
+      "stage": "review",
+      "agent_id": "S3-AGI3-010-REVIEWER",
+      "status": "passed",
+      "findings": [
+        {
+          "id": "f-2f927879",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 6: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-391948dd",
+          "severity": "MAJOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 45,
+          "title": "Unguarded risky call: `urllib.request.urlopen()`",
+          "detail": "Network or file operation without a try/except guard.",
+          "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:45: urllib.request.urlopen",
+          "remediation": "Wrap in try/except and handle the specific exception class.",
+          "confidence": 0.7,
+          "tags": [
+            "error-handling"
+          ]
+        },
+        {
+          "id": "f-f106ba8c",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 10,
+          "title": "Missing type hints on public function `test_safe_div_normal`",
+          "detail": "Missing annotations for: self",
+          "evidence": "def test_safe_div_normal(self)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-6353af73",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 10,
+          "title": "Missing return annotation on `test_safe_div_normal`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_safe_div_normal(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-1f463f83",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 13,
+          "title": "Missing type hints on public function `test_safe_div_zero_raises`",
+          "detail": "Missing annotations for: self",
+          "evidence": "def test_safe_div_zero_raises(self)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-961e44aa",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 13,
+          "title": "Missing return annotation on `test_safe_div_zero_raises`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_safe_div_zero_raises(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-754bb0d5",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 17,
+          "title": "Missing type hints on public function `test_add`",
+          "detail": "Missing annotations for: self",
+          "evidence": "def test_add(self)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-045b04ca",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 17,
+          "title": "Missing return annotation on `test_add`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_add(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-089a0d9a",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 22,
+          "title": "Missing type hints on public function `test_parse_csv`",
+          "detail": "Missing annotations for: self",
+          "evidence": "def test_parse_csv(self)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-dfe50365",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 22,
+          "title": "Missing return annotation on `test_parse_csv`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_parse_csv(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-da32eea7",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 25,
+          "title": "Missing type hints on public function `test_token_hex_length`",
+          "detail": "Missing annotations for: self",
+          "evidence": "def test_token_hex_length(self)",
+          "remediation": "Add type annotations to arguments and return.",
+          "confidence": 0.7,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-deb01973",
+          "severity": "INFO",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 25,
+          "title": "Missing return annotation on `test_token_hex_length`",
+          "detail": "Public function has no return type annotation.",
+          "evidence": "def test_token_hex_length(...)",
+          "remediation": "Add a return annotation.",
+          "confidence": 0.6,
+          "tags": [
+            "typing"
+          ]
+        },
+        {
+          "id": "f-68507961",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 2,
+          "title": "Unused import: `annotations`",
+          "detail": "Imported but never referenced.",
+          "evidence": "line 2: import annotations",
+          "remediation": "Remove the unused import.",
+          "confidence": 0.9,
+          "tags": [
+            "unused-import"
+          ]
+        },
+        {
+          "id": "f-2e49217c",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+          "line": 6,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:6",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        },
+        {
+          "id": "f-0f8f8618",
+          "severity": "MINOR",
+          "stage": "review",
+          "agent_id": "S3-AGI3-010-REVIEWER",
+          "file": "/workspace/crtw/selfcheck/clean/test_clean.py",
+          "line": 2,
+          "title": "ast-fallback:F401: imported but unused: 'annotations'",
+          "detail": "imported but unused: 'annotations'",
+          "evidence": "/workspace/crtw/selfcheck/clean/test_clean.py:2",
+          "remediation": "See linter documentation.",
+          "confidence": 0.8,
+          "tags": [
+            "linter",
+            "ast_fallback"
+          ]
+        }
+      ],
+      "duration_ms": 3988,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:49+00:00",
+      "finished_at": "2026-10-15T08:15:53+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages",
+          "files",
+          "files_meta"
+        ]
+      }
+    },
+    {
+      "stage": "debug",
+      "agent_id": "S6-AGI3-014-DEBUGGER",
+      "status": "passed",
+      "findings": [],
+      "duration_ms": 0,
+      "artifacts": [],
+      "error": null,
+      "started_at": "2026-10-15T08:15:53+00:00",
+      "finished_at": "2026-10-15T08:15:53+00:00",
+      "metadata": {
+        "evidence_keys": [
+          "target",
+          "adapters",
+          "prior_stages"
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "verdict": "blocked",
+    "weighted_score": 64,
+    "counts": {
+      "BLOCKER": 1,
+      "MAJOR": 15,
+      "MINOR": 9,
+      "INFO": 5
+    },
+    "blocking_findings": [
+      {
+        "id": "f-33fc0476",
+        "severity": "BLOCKER",
+        "stage": "security",
+        "agent_id": "S6-AGI3-037-SECURITYAUDITOR",
+        "file": "/workspace/crtw/selfcheck/clean/__init__.py",
+        "line": 55,
+        "title": "SQL injection risk: f-string SQL query",
+        "detail": "SQL string built with f-string / .format() — use parameterized queries.",
+        "evidence": "/workspace/crtw/selfcheck/clean/__init__.py:55",
+        "remediation": "Use parameter substitution: `cursor.execute(sql, (param,))`.",
+        "confidence": 0.85,
+        "tags": [
+          "sql-injection"
+        ]
+      }
+    ],
+    "summary": "verdict=blocked score=64 counts=BLOCKER=1, CRITICAL=0, MAJOR=15, MINOR=9, INFO=5",
+    "thresholds": {
+      "block_threshold": 10,
+      "review_threshold": 5,
+      "severity_weights": {
+        "BLOCKER": 10,
+        "CRITICAL": 5,
+        "MAJOR": 3,
+        "MINOR": 1,
+        "INFO": 0
+      }
+    }
+  },
+  "artifacts": [],
+  "config_path": null,
+  "config_overrides": {}
+}
