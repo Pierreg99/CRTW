@@ -192,36 +192,78 @@ stages:
 
 ## Wiring in a Real LLM Provider
 
-The system ships with `NullProvider` (offline, returns empty suggestions) so
-the workflow works with **zero** network access.
+The `crtw.agents.llm` module ships **four providers** out of the box. Pick
+one by name (env var), by FQCN (`module:Class`), or by registration.
 
-To swap in a real provider:
+| Name | Class | Online? | Use case |
+|---|---|---|---|
+| `null` | `NullProvider` | No | Default. Empty suggestion string; pipeline still produces real findings. |
+| `offline-mock` | `OfflineMockProvider` | No | Heuristic templates (secrets, SQLi, MD5, RCE, shell=True, TLS) without any LLM. |
+| `scripted` | `ScriptedProvider` | No | Deterministic test double; pre-load canned responses, raises `LLMStopped` when exhausted. |
+| `anthropic` | `AnthropicProvider` | Yes | Real Claude API. Validates model against a prefix allowlist, tracks token + cost. |
+
+Activate a provider by setting `CRTW_LLM_PROVIDER`:
+
+```bash
+# Heuristic offline templates (no API key, no network):
+export CRTW_LLM_PROVIDER=offline-mock
+python -m crtw.cli --target ./your_pkg
+
+# Real Claude (requires ANTHROPIC_API_KEY + pip install anthropic):
+export CRTW_LLM_PROVIDER=anthropic
+export ANTHROPIC_API_KEY=sk-ant-...
+python -m crtw.cli --target ./your_pkg
+
+# Module:Class form for custom providers:
+export CRTW_LLM_PROVIDER=crtw.agents.llm:OfflineMockProvider
+```
+
+The default is `null` — the pipeline is fully deterministic and never breaks
+if the LLM is unreachable. Any provider failure is wrapped in
+`LLMStopped` and re-raised so the orchestrator can decide whether to fall
+back.
+
+### Writing your own provider
 
 ```python
 # crtw/my_llm.py
-from crtw.agents.llm import LLMProvider, LLMRequest, LLMResponse
+from crtw.agents.llm import BaseProvider, LLMRequest, LLMResponse
 
-class MyProvider:
+class MyProvider(BaseProvider):
     name = "my-llm"
 
-    def complete(self, request: LLMRequest) -> LLMResponse:
+    def _complete(self, request: LLMRequest) -> LLMResponse:
         # call your model here
-        return LLMResponse(text="...", provider=self.name)
+        return LLMResponse(text="...", provider=self.name, raw={...})
 ```
 
-Then either set the env var:
+Activate it via env var, or register it under a short name and use that:
 
-```bash
-export CRTW_LLM_PROVIDER=crtw.my_llm:MyProvider
-python -m crtw.cli --target ./...
+```python
+from crtw.agents.llm import register_provider, set_default_provider
+register_provider("my-llm", MyProvider)
+set_default_provider(MyProvider())
 ```
-
-or pass it programmatically via `Orchestrator(..., llm_provider=...)`.
 
 Subclasses of `ReviewAgent` can use `self.llm.complete(...)` to enrich any
 Finding with `remediation` text, summaries, or to ask the model to suggest
 patches. The deterministic AST/regex/static-analysis checks remain the source
 of truth and never depend on the LLM being online.
+
+### Usage tracking
+
+Every `BaseProvider` keeps a thread-safe counter of `requests`, `input_tokens`,
+`output_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens`,
+and an approximate `cost_usd` (using a small list-price table). The
+`AnthropicProvider` populates these from the real response; offline providers
+leave token counts at zero. Inspect the rollup at any time:
+
+```python
+provider = get_default_provider()
+provider.complete(LLMRequest(user="...", system="..."))
+print(provider.usage())
+# -> {'requests': 1, 'input_tokens': 12, 'output_tokens': 7, ..., 'cost_usd': 0.0001, 'models': {...}}
+```
 
 ---
 
