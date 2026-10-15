@@ -908,3 +908,18 @@
 # This allows outer git to track inner repo files while preserving inner git history
 **/.git_backup_by_agent
 **/.git_backup_by_agent/
+
+# ==============================================================================
+# SANDBOX PLATFORM SCAFFOLDING (not part of the CRTW project)
+# ==============================================================================
+# Platform browser tooling: imports non-existent internal packages
+# (metrics.metrics, neo.utils) and ships a "Matrix Error Logger" extension.
+/browser/
+# Sandbox scratch symlink -> /tmp/workspace_tmp
+/tmp
+# Sandbox workspace ACL metadata
+/workspace.json
+# Sandbox dependency manifest: declares name="workspace" and
+# packages=["code"] (a directory that does not exist). CRTW itself has no
+# required third-party dependencies.
+/pyproject.toml
